@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/react'
 
-export const OurReset = css`
+export const Reset = css`
    /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
    /* Document
