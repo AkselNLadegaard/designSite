@@ -10,8 +10,8 @@ const Container = styled.header`
   top: 0;
   left: 0;
   width: 100%;
-  background: hotpink;
-
+  background: ${constant.green};
+  color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,34 +21,37 @@ const Container = styled.header`
   svg {
     width: 1em;
     height: 1em;
+    fill: white;
   }
   h1 {
     font-size: 2em;
+    margin: 0;
   }
 `
 const Menu = styled.div`
   position: absolute;
-  top: 0;
-  left: -30em;
+  top: 64px;
+  left: 0;
+  transform: translateX(-30em);
   width: 30em;
   visibility: hidden;
-  height: 100vh;
-  background: orange;
+  height: calc(100vh - 64px);
+  background: ${constant.purple};
   transition: 0.3s ease;
-  transition-property: left, visibility;
+  transition-property: transform, visibility;
   transition-delay: 0s, 0.3s;
+  z-index: 5;
 `
 const show = css`
   visibility: visible;
-  left: 0;
+  transform: translateX(0);
   transition: all 0.35s ease;
 `
 const Button = styled.button`
-  background: darkred;
-  outline: none;
-  border: none;
-  width: 128px;
+  background: ${constant.orange};
+  width: 48px;
   height: 48px;
+  border-radius: 50%;
 `
 const Header = ({ siteTitle }) => {
   const [isShown, setMenuState] = useState(false)
@@ -61,18 +64,17 @@ const Header = ({ siteTitle }) => {
   }
   return (
     <Container>
-      {console.log(isShown)}
       <Menu css={isShown ? show : null}>
         <h2>hey hey hey </h2>
       </Menu>
       <h1>
-        <Link to="/">{siteTitle}</Link>
+        {siteTitle}
       </h1>
       <Button onClick={showMenu}>
         <svg viewBox="0 0 100 80" width="40" height="40">
-          <rect width="100" height="20" />
-          <rect y="30" width="100" height="20" />
-          <rect y="60" width="100" height="20" />
+          <rect width="100" height="16" />
+          <rect y="30" width="100" height="16" />
+          <rect y="60" width="100" height="16" />
         </svg>
       </Button>
     </Container>

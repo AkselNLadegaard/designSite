@@ -5,6 +5,8 @@ import Layout from '../components/Layout'
 import Image from '../components/Image'
 import Seo from '../components/Seo'
 import styled from '@emotion/styled'
+import CardsList from '../components/designCards/CardsList'
+import * as constant from '../components/abstracts/constants'
 
 const SiteStructure = styled.div`
   display: flex;
@@ -13,13 +15,16 @@ const SiteStructure = styled.div`
 const SideBar = styled.aside`
   flex-basis: 30em;
   max-width: 30em;
-  background-color: maroon;
+  height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  background-color: ${constant.blue};
   padding: 2em;
 `
 const Content = styled.div`
   width: 100%;
   height: 100%;
-  background-color: aquamarine;
+  background-color: floralwhite;
 `
 const IndexPage = () => {
 
@@ -28,19 +33,10 @@ const IndexPage = () => {
         <Seo title="Home"/>
         <SiteStructure>
           <SideBar>
-            <h2>here We have SIDEBAR!!!</h2>
+            <CardsList />
           </SideBar>
           <Content>
-            <ul>
-              <li>List 1</li>
-              <li>List 1</li>
-              <li>List 1</li>
-              <li>List 1</li>
-              <li>List 1</li>
-              <li>List 1</li>
-              <li>List 1</li>
-            </ul>
-            <Link to="/page-2/">Go to page 2</Link>
+
           </Content>
         </SiteStructure>
       </Layout>
