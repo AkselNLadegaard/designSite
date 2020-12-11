@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect, useReducer, useState } from 'react'
 import Card from './Card'
 import styled from '@emotion/styled'
 import { v4 as uuidv4 } from 'uuid'
 import * as constant from '../abstracts/constants'
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -20,6 +20,7 @@ const ContainerList = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${constant.gap};
+  z-index: 1;
 `
 const Add = styled.button`
   height: 48px;
@@ -48,9 +49,14 @@ const initialCards = [
     content: 'Content 1',
   },
 ]
+export const CARDSACTIONS = {
+  ADD_CARD: 'ADD_CARD',
+  EDIT_CARD: 'EDIT_CARD',
+  REMOVE_CARD: 'REMOVE_CARD',
+}
 const cardsReducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_CARD':
+    case CARDSACTIONS.ADD_CARD:
       return {
         ...state,
         cards: state.cards.concat({
@@ -59,13 +65,12 @@ const cardsReducer = (state, action) => {
           content: action.content,
         }),
       }
-    case 'REMOVE_CARD':
-      // https://www.robinwieruch.de/react-remove-item-from-list
+    case CARDSACTIONS.REMOVE_CARD:
       return {
         ...state,
         cards: state.cards.filter(item => item.id !== action.id),
       }
-    case 'EDIT_CARD':
+    case CARDSACTIONS.EDIT_CARD:
       const newCards = state.cards.map(item => {
         if (item.id === action.id) {
           const updatedCard = {
@@ -82,36 +87,32 @@ const cardsReducer = (state, action) => {
       throw new Error()
   }
 }
-const List = ({ cards, onRemove, onSave }) => (
+const List = ({ cards, onRemove, onSave, dispatch }) => (
   <ContainerList>
     {cards.map(card => (
-      <Card key={card.id} card={card} onRemove={onRemove} onSave={onSave} />
-
+      <Card
+        key={uuidv4}
+        card={card}
+        onRemove={onRemove}
+        onSave={onSave}
+        dispatch={dispatch}
+      />
     ))}
   </ContainerList>
 )
 
 const CardsList = () => {
-  const [cardsData, dispatchCardsData] = React.useReducer(cardsReducer, {
+  const [cardsData, dispatchCardsData] = useReducer(cardsReducer, {
     cards: initialCards,
     isShowCards: true,
   })
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
-  function handleChange(event) {
-    if (event.target.name === 'addTitle') {
-      setTitle(event.target.value)
-    } else if (event.target.name === 'addContent') {
-      setContent(event.target.value)
-    } else {
-      console.log('handleChange does not account for event name.')
-    }
-  }
   function handleAdd() {
     if (title && content) {
       dispatchCardsData({
-        type: 'ADD_CARD',
+        type: CARDSACTIONS.ADD_CARD,
         id: uuidv4(),
         title: title,
         content: content,
@@ -123,12 +124,16 @@ const CardsList = () => {
     }
   }
   function handleRemove(id) {
-    dispatchCardsData({ type: 'REMOVE_CARD', id })
+    dispatchCardsData({ type: CARDSACTIONS.REMOVE_CARD, id })
   }
   function handleEdit(id, newTitle, newContent) {
-    dispatchCardsData({ type: 'EDIT_CARD', id: id, title: newTitle, content: newContent})
+    dispatchCardsData({
+      type: CARDSACTIONS.EDIT_CARD,
+      id: id,
+      title: newTitle,
+      content: newContent,
+    })
   }
-
   return (
     <Container>
       <NewCard>
@@ -136,7 +141,7 @@ const CardsList = () => {
           name="addTitle"
           type="text"
           value={title}
-          onChange={handleChange}
+          onChange={() => setTitle(title)}
           placeholder="Title."
           tabIndex={1}
         />
@@ -144,7 +149,7 @@ const CardsList = () => {
         <textarea
           name="addContent"
           value={content}
-          onChange={handleChange}
+          onChange={() => setContent(content)}
           placeholder="Card content."
           tabIndex={2}
         />
@@ -154,6 +159,7 @@ const CardsList = () => {
           cards={cardsData.cards}
           onRemove={handleRemove}
           onSave={handleEdit}
+          dispatch={dispatchCardsData}
         />
       )}
     </Container>

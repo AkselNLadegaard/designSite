@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
-import {css} from '@emotion/react'
+import { css } from '@emotion/react'
 import * as constant from '../abstracts/constants'
+import { CARDSACTIONS } from './CardsList'
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -57,11 +57,10 @@ const Confirm = styled.button`
     content: 'V';
   }
 `
-const Card = ({ card, onRemove, onEdit, onSave  }) => {
+const  Card = ({ card,  dispatch }) => {
   const [newTitle, setNewTitle] = useState(card.title)
   const [newContent, setNewContent] = useState(card.content)
   const [editing, setEditing] = useState(false)
-
   function handleChange(event) {
     if (event.target.name === 'editTitle') {
       setNewTitle(event.target.value)
@@ -72,12 +71,11 @@ const Card = ({ card, onRemove, onEdit, onSave  }) => {
     }
   }
   function handleEdit(id) {
-    setEditing(false)
-    onSave(id, newTitle, newContent)
-
+    setEditing(!editing)
+    dispatch({type: CARDSACTIONS.EDIT_CARD, id: id, title: newTitle, content: newContent})
   }
   return (
-    <Container key={card.id}>
+    <Container>
       {editing ? (
         <input
           type="text"
@@ -89,11 +87,11 @@ const Card = ({ card, onRemove, onEdit, onSave  }) => {
         <h3>{card.title}</h3>
       )}
       <Actions>
-        <Remove type="button" onClick={() => onRemove(card.id)} />
+        <Remove type="button" onClick={() => dispatch({type: CARDSACTIONS.REMOVE_CARD, id: card.id })} />
         {editing ? (
           <Confirm type="button" onClick={() => handleEdit(card.id)} />
         ) : (
-          <Edit type="button" onClick={() => setEditing(true)} />
+          <Edit type="button" onClick={() => setEditing(!editing)} />
         )}
       </Actions>
 

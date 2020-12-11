@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
@@ -17,7 +16,7 @@ const Container = styled.header`
   align-items: center;
   padding: 1em 3em;
   height: 64px;
-
+  z-index: 10;
   svg {
     width: 1em;
     height: 1em;

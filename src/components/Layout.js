@@ -33,9 +33,8 @@ const Layout = ({ children }) => {
       />
       <Header siteTitle={data.site.siteMetadata.title} />
       <main>{children}</main>
-      <Footer>
-        <h1>This is the footer</h1>
-      </Footer>
+      <Footer siteTitle={data.site.siteMetadata.title} />
+
     </>
   )
 }

@@ -17,10 +17,11 @@ const Content = styled.div`
     max-width: ${constant.maxWidth};
   }
 `
-const Footer = ({}) => (
+const Footer = ({siteTitle}) => (
   <Container>
     <Content>
       <h1>This is a nice footer</h1>
+        <p>{siteTitle}</p>
     </Content>
   </Container>
 )
