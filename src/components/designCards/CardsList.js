@@ -45,9 +45,19 @@ const NewCard = styled.div`
 const initialCards = [
   {
     id: uuidv4(),
-    title: 'Card 1',
-    content: 'Content 1',
+    title: 'set up postgres CRUD ',
+    content: 'https://blog.logrocket.com/setting-up-a-restful-api-with-node-js-and-postgresql-d96d6fc892d8/',
   },
+  {
+    id: uuidv4(),
+    title: 'Make simple comment esque system',
+    content: 'https://www.gatsbyjs.com/blog/2019-08-27-roll-your-own-comment-system/',
+  },
+  {
+    id: uuidv4(),
+    title: 'Set up hooks based Drag N Drop',
+    content: 'no one konws yet'
+  }
 ]
 export const CARDSACTIONS = {
   ADD_CARD: 'ADD_CARD',
