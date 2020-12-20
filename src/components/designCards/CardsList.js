@@ -144,6 +144,15 @@ const CardsList = () => {
       content: newContent,
     })
   }
+  function handleChange(event) {
+    if (event.target.name === 'addTitle') {
+      setTitle(event.target.value)
+    } else if (event.target.name === 'addContent') {
+      setContent(event.target.value)
+    } else {
+      console.log('handleChange does not account for event name.')
+    }
+  }
   return (
     <Container>
       <NewCard>
@@ -151,7 +160,7 @@ const CardsList = () => {
           name="addTitle"
           type="text"
           value={title}
-          onChange={() => setTitle(title)}
+          onChange={(event) => handleChange(event)}
           placeholder="Title."
           tabIndex={1}
         />
@@ -159,7 +168,7 @@ const CardsList = () => {
         <textarea
           name="addContent"
           value={content}
-          onChange={() => setContent(content)}
+          onChange={(event) => handleChange(event)}
           placeholder="Card content."
           tabIndex={2}
         />
