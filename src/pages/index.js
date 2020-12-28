@@ -22,6 +22,7 @@ const SideBar = styled.aside`
   flex-direction: column;
   background-color: ${constant.blue};
   padding: 2em;
+  overflow-y: auto;
 `
 const Content = styled.div`
   width: 100%;

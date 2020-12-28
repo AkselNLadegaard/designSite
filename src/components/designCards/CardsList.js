@@ -10,10 +10,9 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   flex-grow: 1;
-  overflow-y: auto;
   gap: ${constant.gap};
   [name='addTitle'] {
-    width: calc(100% - 48px - 12px);
+    overflow: scroll;
   }
 `
 const ContainerList = styled.div`
@@ -22,9 +21,15 @@ const ContainerList = styled.div`
   gap: ${constant.gap};
   z-index: 1;
 `
+const FirstLine = styled.div`
+  display: flex;
+  gap: 12px;
+  max-width: 100%;
+`
 const Add = styled.button`
   height: 48px;
   width: 48px;
+  flex-basis: 48px;
   border-radius: 50%;
   background: ${constant.green};
   ::after {
@@ -32,8 +37,9 @@ const Add = styled.button`
     font-size: 2em;
     color: ${constant.white};
   }
-  :focus, :active {
-    border: 2px solid ${constant.white}; 
+  :focus,
+  :active {
+    border: 2px solid ${constant.white};
   }
 `
 const NewCard = styled.div`
@@ -49,18 +55,26 @@ const initialCards = [
   {
     id: uuidv4(),
     title: 'set up postgres CRUD ',
-    content: 'https://blog.logrocket.com/setting-up-a-restful-api-with-node-js-and-postgresql-d96d6fc892d8/',
+    content:
+      'https://blog.logrocket.com/setting-up-a-restful-api-with-node-js-and-postgresql-d96d6fc892d8/',
   },
   {
     id: uuidv4(),
     title: 'Make simple comment esque system',
-    content: 'https://www.gatsbyjs.com/blog/2019-08-27-roll-your-own-comment-system/',
+    content:
+      'https://www.gatsbyjs.com/blog/2019-08-27-roll-your-own-comment-system/',
   },
   {
     id: uuidv4(),
     title: 'Set up hooks based Drag N Drop',
-    content: 'no one konws yet'
-  }
+    content: 'no one konws yet',
+  },
+  {
+    id: uuidv4(),
+    title: 'Test different content',
+    content:
+      'This is a really long description, instead of lorem ipsum, it is written out by hand, on a keyboard!',
+  },
 ]
 export const CARDSACTIONS = {
   ADD_CARD: 'ADD_CARD',
@@ -159,19 +173,21 @@ const CardsList = () => {
   return (
     <Container>
       <NewCard>
-        <input
-          name="addTitle"
-          type="text"
-          value={title}
-          onChange={(event) => handleChange(event)}
-          placeholder="Title."
-          tabIndex={1}
-        />
-        <Add type="button" onClick={handleAdd} tabIndex={3} />
+        <FirstLine>
+          <input
+            name="addTitle"
+            type="text"
+            value={title}
+            onChange={event => handleChange(event)}
+            placeholder="Title."
+            tabIndex={1}
+          />
+          <Add type="button" onClick={handleAdd} tabIndex={3} />
+        </FirstLine>
         <textarea
           name="addContent"
           value={content}
-          onChange={(event) => handleChange(event)}
+          onChange={event => handleChange(event)}
           placeholder="Card content."
           tabIndex={2}
         />

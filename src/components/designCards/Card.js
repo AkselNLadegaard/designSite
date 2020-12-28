@@ -6,28 +6,46 @@ import { CARDSACTIONS } from './CardsList'
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
+  gap: 16px;
   background: ${constant.white};
   border-radius: ${constant.borderRadius};
   box-shadow: 2px 4px 0px rgba(0, 0, 0, 0.5);
   padding: 1em;
   position: relative;
-  h3 {
-    width: calc(100% - 48px);
-  }
-  input[type='text'] {
+
+  input[type='text'],
+  textarea {
     border: solid 1px ${constant.black};
+    overflow: scroll;
+    padding: 6px;
+    margin: -6px;
+  }
+  textarea {
+    overflow: auto;
   }
 `
 const FirstLine = styled.div`
   display: flex;
+  align-items: start;
+  gap: 12px;
+  /*h3,
+  input {
+    width: calc(100% - 48px);
+  }*/
 `
 const Content = styled.div`
   width: 100%;
+  textarea {
+    max-height: 12em;
+    min-height: 6em;
+    height: fit-content;
+  }
 `
 const Actions = styled.div`
   display: flex;
   flex-direction: column;
-  flex-basis: 64px;
+  flex-basis: 32px;
+  gap: 8px;
 `
 const CardActionButton = css`
   height: 32px;
@@ -90,7 +108,7 @@ const Card = ({ card, dispatch }) => {
     <Container>
       <FirstLine>
         {editing ? (
-          <input
+          <textarea
             type="text"
             name="editTitle"
             value={newTitle}
@@ -115,7 +133,7 @@ const Card = ({ card, dispatch }) => {
       </FirstLine>
       <Content>
         {editing ? (
-          <input
+          <textarea
             type="text"
             name="editContent"
             value={newContent}
