@@ -7,7 +7,7 @@ import Seo from '../components/Seo'
 import styled from '@emotion/styled'
 import CardsList from '../components/designCards/CardsList'
 import * as constant from '../components/abstracts/constants'
-
+import StaticSVG from '../components/svgPlaybox'
 const SiteStructure = styled.div`
   display: flex;
   width: 100%;
@@ -36,7 +36,9 @@ const IndexPage = () => {
             <CardsList />
           </SideBar>
           <Content>
+                <StaticSVG>
 
+                </StaticSVG>
           </Content>
         </SiteStructure>
       </Layout>

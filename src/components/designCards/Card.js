@@ -15,7 +15,7 @@ const Container = styled.div`
     width: calc(100% - 48px);
   }
   input[type='text'] {
-    border: solid 1px black;
+    border: solid 1px ${constant.black};
   }
 `
 const Content = styled.div`
@@ -24,7 +24,7 @@ const Content = styled.div`
 const Actions = styled.div`
   display: flex;
   flex-direction: column;
-  flex-basis: 48px;
+  flex-basis: 128px;
 `
 const CardActionButton = css`
   height: 32px;
@@ -34,6 +34,9 @@ const CardActionButton = css`
   ::after {
     content: '';
     font-size: 1em;
+  }
+  :focus, :active {
+    border: 2px solid ${constant.black};
   }
 `
 const Remove = styled.button`

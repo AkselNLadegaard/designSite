@@ -3,8 +3,9 @@ export const orange = 'hsla(45, 100%, 48%, 1)';
 export const purple =  'hsla(349, 24%, 32%, 1)';
 export const green =  'hsla(161, 66%, 38%, 1)';
 export const red = 'hsla(6, 77%, 62%, 1)';
-export const white = 'floralwhite';
 
+export const white = 'floralwhite';
+export const black = 'black'
 export const borderRadius = '12px'
 
 export const gap = '0.67em'

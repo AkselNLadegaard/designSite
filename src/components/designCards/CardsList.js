@@ -32,6 +32,9 @@ const Add = styled.button`
     font-size: 2em;
     color: ${constant.white};
   }
+  :focus, :active {
+    border: 2px solid ${constant.white}; 
+  }
 `
 const NewCard = styled.div`
   display: flex;
