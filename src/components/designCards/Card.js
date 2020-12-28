@@ -18,13 +18,16 @@ const Container = styled.div`
     border: solid 1px ${constant.black};
   }
 `
+const FirstLine = styled.div`
+  display: flex;
+`
 const Content = styled.div`
   width: 100%;
 `
 const Actions = styled.div`
   display: flex;
   flex-direction: column;
-  flex-basis: 128px;
+  flex-basis: 64px;
 `
 const CardActionButton = css`
   height: 32px;
@@ -35,7 +38,8 @@ const CardActionButton = css`
     content: '';
     font-size: 1em;
   }
-  :focus, :active {
+  :focus,
+  :active {
     border: 2px solid ${constant.black};
   }
 `
@@ -60,7 +64,7 @@ const Confirm = styled.button`
     content: 'V';
   }
 `
-const  Card = ({ card,  dispatch }) => {
+const Card = ({ card, dispatch }) => {
   const [newTitle, setNewTitle] = useState(card.title)
   const [newContent, setNewContent] = useState(card.content)
   const [editing, setEditing] = useState(false)
@@ -75,29 +79,40 @@ const  Card = ({ card,  dispatch }) => {
   }
   function handleEdit(id) {
     setEditing(!editing)
-    dispatch({type: CARDSACTIONS.EDIT_CARD, id: id, title: newTitle, content: newContent})
+    dispatch({
+      type: CARDSACTIONS.EDIT_CARD,
+      id: id,
+      title: newTitle,
+      content: newContent,
+    })
   }
   return (
     <Container>
-      {editing ? (
-        <input
-          type="text"
-          name="editTitle"
-          value={newTitle}
-          onChange={handleChange}
-        />
-      ) : (
-        <h3>{card.title}</h3>
-      )}
-      <Actions>
-        <Remove type="button" onClick={() => dispatch({type: CARDSACTIONS.REMOVE_CARD, id: card.id })} />
+      <FirstLine>
         {editing ? (
-          <Confirm type="button" onClick={() => handleEdit(card.id)} />
+          <input
+            type="text"
+            name="editTitle"
+            value={newTitle}
+            onChange={handleChange}
+          />
         ) : (
-          <Edit type="button" onClick={() => setEditing(!editing)} />
+          <h3>{card.title}</h3>
         )}
-      </Actions>
-
+        <Actions>
+          <Remove
+            type="button"
+            onClick={() =>
+              dispatch({ type: CARDSACTIONS.REMOVE_CARD, id: card.id })
+            }
+          />
+          {editing ? (
+            <Confirm type="button" onClick={() => handleEdit(card.id)} />
+          ) : (
+            <Edit type="button" onClick={() => setEditing(!editing)} />
+          )}
+        </Actions>
+      </FirstLine>
       <Content>
         {editing ? (
           <input

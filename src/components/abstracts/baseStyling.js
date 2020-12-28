@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import * as constant from './constants'
 export const baseStyles = css`
-  html {
+  /*html {
     font-family: 'Ubuntu', sans-serif;
   }
   h1,
@@ -13,12 +13,13 @@ export const baseStyles = css`
     font-family: 'VT323', monospace; 
     margin-top: 0;
     margin-block-start: 0;
-  }
+  }*/
   button {
     outline: none;
     border: 0;
   }
-  input[type='text'], textarea {
+  input[type='text'],
+  textarea {
     outline: none;
     border: none;
     min-height: 32px;

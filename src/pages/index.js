@@ -8,6 +8,8 @@ import styled from '@emotion/styled'
 import CardsList from '../components/designCards/CardsList'
 import * as constant from '../components/abstracts/constants'
 import StaticSVG from '../components/svgPlaybox'
+import Article from '../components/Article'
+
 const SiteStructure = styled.div`
   display: flex;
   width: 100%;
@@ -23,25 +25,24 @@ const SideBar = styled.aside`
 `
 const Content = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 64px);
   background-color: floralwhite;
+  overflow-y: scroll;
 `
 const IndexPage = () => {
-
   return (
-      <Layout>
-        <Seo title="Home"/>
-        <SiteStructure>
-          <SideBar>
-            <CardsList />
-          </SideBar>
-          <Content>
-                <StaticSVG>
-
-                </StaticSVG>
-          </Content>
-        </SiteStructure>
-      </Layout>
+    <Layout>
+      <Seo title="Home" />
+      <SiteStructure>
+        <SideBar>
+          <CardsList />
+        </SideBar>
+        <Content>
+          <StaticSVG></StaticSVG>
+          <Article></Article>
+        </Content>
+      </SiteStructure>
+    </Layout>
   )
 }
 
